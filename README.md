@@ -3,7 +3,6 @@
 
 This package sets up a [Gulp](https://gulpjs.com/) program that compiles ES2015, Vue and SASS files for use within tozti extensions.
 
-
 ## Usage.
 This package is not meant to be used alone, but rather as a dependency of your extension.
 
@@ -28,6 +27,8 @@ gulp({
 ```
 
 ## Installing `tozti-gulp` globally.
+
+**Warning: the following has not yet been tested thoroughly, and should not be used in production right now.**
 
 As this package and its dependencies are quite heavy, you might not want to add a copy of them to each of your tozti extensions. One way to avoid this by installing this package globally (using the `-g` flag), and then link that global instance in each of the extensions you are working on.
 
