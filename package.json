@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "description": "A Gulp wrapper used by tozti extensions.",
   "main": "index.js",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
     "babelify": "^8.0.0",
