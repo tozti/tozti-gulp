@@ -22,7 +22,7 @@ module.exports = function (options) {
     options.images   = options.images   || ['assets/img/**'],
     options.styles   = options.styles   || ['assets/sass/style.scss']
     options.scripts  = options.scripts  || ['src/index.js']
-    options.external = options.external || ['vue', 'tozti']
+    options.external = options.external || []
 
     let production = process.env.NODE_ENV == 'production'
 
@@ -31,6 +31,10 @@ module.exports = function (options) {
             debug: !production
         })
         .external(options.external)
+        .transform('browserify-shim', {
+            'vue': 'global:Vue'
+            'tozti': 'global:tozti'
+        })
         .transform('vueify', {babel: {presets: ['es2015']}})
         .transform('babelify', {presets: ['es2015']})
 
