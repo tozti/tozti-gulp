@@ -19,7 +19,7 @@ let browserify = require('browserify')
 const defaultPaths = {
     scripts: ['src/index.js'],
     fonts: ['assets/fonts'],
-    images: ['assets/img'], 
+    images: ['assets/img'],
     styles: ['assets/sass/style.scss'],
 }
 
@@ -32,6 +32,7 @@ module.exports = function (paths) {
             entries: paths.scripts,
             debug: !production
         })
+        .external(['vue', 'tozti'])
         .transform('vueify')
         .transform('babelify')
 

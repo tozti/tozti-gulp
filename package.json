@@ -1,6 +1,6 @@
 {
   "name": "tozti-gulp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Gulp wrapper used by tozti extensions.",
   "main": "index.js",
   "dependencies": {
