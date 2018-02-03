@@ -20,7 +20,6 @@
     "vinyl-source-stream": "^2.0.0",
     "vueify": "^9.4.1",
     "watchify": "^3.9.0",
-    "browserify-shim": "^3.8.14"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

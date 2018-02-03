@@ -1,5 +1,6 @@
 'use strict'
 
+let path = require('path')
 let gulp = require('gulp')
 let del = require('del')
 let gulpif = require('gulp-if')
@@ -31,10 +32,6 @@ module.exports = function (options) {
             debug: !production
         })
         .external(options.external)
-        .transform('browserify-shim', {
-            'vue': 'global:Vue'
-            'tozti': 'global:tozti'
-        })
         .transform('vueify', {babel: {presets: ['es2015']}})
         .transform('babelify', {presets: ['es2015']})
 
@@ -92,7 +89,11 @@ module.exports = function (options) {
 
         gulp.watch(options.fonts, ['fonts'])
         gulp.watch(options.images, ['images'])
-        gulp.watch(options.styles, ['sass'])
+        
+        // We need to watch the entire styles folder instead of
+        // only the style.scss file, so we extrapolate.
+        let stylesDirs = options.styles.map(f => path.dirname(f) + '/**')
+        gulp.watch(stylesDirs, ['sass'])
     })
 
     // Compile the Javascript sources and the assets.
