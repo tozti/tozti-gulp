@@ -19,12 +19,12 @@
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0",
     "vueify": "^9.4.1",
-    "watchify": "^3.9.0",
+    "watchify": "^3.9.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "exit 0"
   },
   "author": "Romain Liautaud <romain.liautaud@ens-lyon.fr>",
-  "license": "AGPL-3.0",
+  "license": "AGPL-3.0"
 }
