@@ -15,26 +15,24 @@ let sourcemaps = require('gulp-sourcemaps')
 let watchify = require('watchify')
 let browserify = require('browserify')
 
-// The default path in which to look for assets.
-const defaultPaths = {
-    scripts: ['src/index.js'],
-    fonts: ['assets/fonts/**'],
-    images: ['assets/img/**'],
-    styles: ['assets/sass/style.scss'],
-}
 
-module.exports = function (paths) {
-    paths = paths || defaultPaths
+module.exports = function (options) {
+    options = options || {}
+    options.fonts    = options.fonts    || ['assets/fonts/**'],
+    options.images   = options.images   || ['assets/img/**'],
+    options.styles   = options.styles   || ['assets/sass/style.scss']
+    options.scripts  = options.scripts  || ['src/index.js']
+    options.external = options.external || ['vue', 'tozti']
 
     let production = process.env.NODE_ENV == 'production'
 
     let bundler = browserify({
-            entries: paths.scripts,
+            entries: options.scripts,
             debug: !production
         })
-        .external(['vue', 'tozti'])
-        .transform('vueify')
-        .transform('babelify')
+        .external(options.external)
+        .transform('vueify', {babel: {presets: ['es2015']}})
+        .transform('babelify', {presets: ['es2015']})
 
     let bundle = b => {
         b.bundle()
@@ -58,13 +56,13 @@ module.exports = function (paths) {
 
     // Copy the fonts to the dist folder.
     gulp.task('fonts', ['clean'], function () {
-        return gulp.src(paths.fonts)
+        return gulp.src(options.fonts)
             .pipe(gulp.dest('dist/fonts'))
     })
 
     // Optimize the images to reduce their size.
     gulp.task('images', ['clean'], function() {
-        return gulp.src(paths.images)
+        return gulp.src(options.images)
            .pipe(imagemin({
                 interlaced: true,
                 progressive: true,
@@ -75,7 +73,7 @@ module.exports = function (paths) {
 
     // Transform the SASS files into regular CSS files and minify them.
     gulp.task('sass', function () {
-        return gulp.src(paths.styles)
+        return gulp.src(options.styles)
            .pipe(sass().on('error', sass.logError))
            .pipe(gulpif(production, cssmin()))
            .pipe(gulp.dest('dist/css'))
@@ -88,9 +86,9 @@ module.exports = function (paths) {
         b.on('update', _ => bundle(b))
         bundle(b)
 
-        gulp.watch(paths.fonts, ['fonts'])
-        gulp.watch(paths.images, ['images'])
-        gulp.watch(paths.styles, ['sass'])
+        gulp.watch(options.fonts, ['fonts'])
+        gulp.watch(options.images, ['images'])
+        gulp.watch(options.styles, ['sass'])
     })
 
     // Compile the Javascript sources and the assets.
