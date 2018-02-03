@@ -23,7 +23,7 @@ module.exports = function (options) {
     options.images   = options.images   || ['assets/img/**'],
     options.styles   = options.styles   || ['assets/sass/style.scss']
     options.scripts  = options.scripts  || ['src/index.js']
-    options.external = options.external || []
+    options.external = options.external || ['vue', 'tozti']
 
     let production = process.env.NODE_ENV == 'production'
 
