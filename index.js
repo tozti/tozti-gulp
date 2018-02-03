@@ -18,8 +18,8 @@ let browserify = require('browserify')
 // The default path in which to look for assets.
 const defaultPaths = {
     scripts: ['src/index.js'],
-    fonts: ['assets/fonts'],
-    images: ['assets/img'],
+    fonts: ['assets/fonts/**'],
+    images: ['assets/img/**'],
     styles: ['assets/sass/style.scss'],
 }
 
